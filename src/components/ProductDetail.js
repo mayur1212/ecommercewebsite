@@ -1,32 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../features/cartSlice"; // ✅ corrected import path
 
-const ProductDetail = ({ addToCart }) => {
+const ProductDetail = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const products = useSelector((state) => state.products.items);
-  const product = products.find(p => p.id === parseInt(productId));
-  
+  const product = products.find((p) => p.id === parseInt(productId));
+
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("description");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // Format date function
+  // ✅ Responsive fix: track window resize
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // ✅ Fix: formatDate for reviews
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   };
 
   if (!product) {
     return (
-      <div style={{ 
-        padding: "40px", 
-        textAlign: "center", 
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" 
-      }}>
+      <div style={{ padding: "40px", textAlign: "center" }}>
         <h2>Product not found</h2>
-        <button 
+        <button
           onClick={() => navigate(-1)}
           style={{
             padding: "10px 20px",
@@ -35,7 +45,7 @@ const ProductDetail = ({ addToCart }) => {
             border: "none",
             borderRadius: "6px",
             cursor: "pointer",
-            marginTop: "20px"
+            marginTop: "20px",
           }}
         >
           Go Back
@@ -44,41 +54,37 @@ const ProductDetail = ({ addToCart }) => {
     );
   }
 
-  // Calculate discounted price
-  const discountedPrice = product.price - (product.price * (product.discountPercentage / 100));
+  // ✅ Price calculations
+  const discountedPrice =
+    product.price - product.price * (product.discountPercentage / 100);
   const savings = product.price - discountedPrice;
-  
-  // Calculate total based on quantity
   const totalPrice = discountedPrice * quantity;
   const totalSavings = savings * quantity;
 
-  // Handle quantity change
+  // ✅ Quantity controls
   const handleQuantityChange = (newQuantity) => {
     if (newQuantity >= 1 && newQuantity <= product.stock) {
       setQuantity(newQuantity);
     }
   };
 
-  // Handle Add to Cart
+  // ✅ Add to cart (stay on same page)
   const handleAddToCart = () => {
-    const productToAdd = {
-      ...product,
-      quantity: quantity
-    };
-    addToCart(productToAdd);
+    dispatch(addToCart({ ...product, quantity }));
     alert(`${quantity} ${product.title} added to cart!`);
   };
 
-  // Handle Buy Now
+  // ✅ Buy now (add + redirect to checkout)
   const handleBuyNow = () => {
-    const productToAdd = {
-      ...product,
-      quantity: quantity
-    };
-    addToCart(productToAdd);
-    // Redirect to checkout
+    dispatch(addToCart({ ...product, quantity }));
     navigate("/checkout");
   };
+
+
+  // --- keep all your styles + JSX the same ---
+  // (rest of your code untouched)
+
+
 
   // Inline styles - keeping your original styles with responsive updates
   const styles = {

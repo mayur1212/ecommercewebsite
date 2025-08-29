@@ -49,15 +49,16 @@ const Navbar = ({ onBagClick }) => {
       >
         {/* Logo */}
         <div
-          style={{
-            fontSize: "24px",
-            fontWeight: "900",
-            color: "#dc2626",
-            cursor: "pointer",
-          }}
-        >
-          MAYURA
-        </div>
+  style={{
+    fontSize: "24px",
+    fontWeight: "900",
+    color: "#dc2626",
+    cursor: "pointer",
+  }}
+  onClick={() => window.location.href = '/'}
+>
+  MAYURA
+</div>
 
         {/* Desktop Nav */}
         {!isMobile && (
