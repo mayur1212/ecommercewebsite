@@ -217,7 +217,7 @@ const Banner = () => {
       </div>
       
       {/* Navigation arrows */}
-      <button 
+      {/* <button 
         style={prevArrowStyle}
         onClick={goToPrev}
         onMouseOver={(e) => {
@@ -244,7 +244,7 @@ const Banner = () => {
         }}
       >
         &#10095;
-      </button>
+      </button> */}
       
       {/* Indicator dots */}
       <div style={indicatorsStyle}>
