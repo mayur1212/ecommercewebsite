@@ -183,7 +183,7 @@ const Footer = () => {
     e.target.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
   };
   const handleButtonLeave = (e) => {
-    e.target.style.backgroundColor = "#ffffffff";
+    e.target.style.backgroundColor = "#FF5252";
     e.target.style.transform = "translateY(0)";
     e.target.style.boxShadow = "none";
   };
