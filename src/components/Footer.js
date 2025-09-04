@@ -57,7 +57,7 @@ const Footer = () => {
       left: "0",
       width: "60px",
       height: "3px",
-      backgroundColor: "#ffeb3b",
+      backgroundColor: "#81C1DA",
       borderRadius: "2px",
     },
     text: {
@@ -77,7 +77,7 @@ const Footer = () => {
     },
     listIcon: {
       marginRight: "10px",
-      color: "#ffeb3b",
+      color: "#81C1DA",
     },
     link: {
       color: "white",
@@ -122,7 +122,7 @@ const Footer = () => {
       transition: "0.3s",
     },
     button: {
-      background: "#ffeb3b",
+      background: "#81C1DA",
       color: "#b71c1c",
       border: "none",
       padding: "12px 20px",
@@ -183,7 +183,7 @@ const Footer = () => {
     e.target.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.2)";
   };
   const handleButtonLeave = (e) => {
-    e.target.style.backgroundColor = "#ffeb3b";
+    e.target.style.backgroundColor = "#ffffffff";
     e.target.style.transform = "translateY(0)";
     e.target.style.boxShadow = "none";
   };
@@ -300,7 +300,7 @@ const Footer = () => {
       <div style={styles.footerBottom}>
         <p style={styles.bottomText}>
           &copy; {new Date().getFullYear()} MAYURA. All rights reserved. | Built
-          with <i className="fas fa-heart" style={{ color: "#ffeb3b" }}></i>
+          with <i className="fas fa-heart" style={{ color: "#000000ff" }}></i>
         </p>
       </div>
     </footer>
