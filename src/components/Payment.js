@@ -138,57 +138,68 @@ const PaymentPage = () => {
       </div>
 
       {/* User Info */}
-      <div style={{
-        marginTop: "20px",
-        padding: "15px",
-        border: "1px solid #e63946",
-        borderRadius: "10px",
-        backgroundColor: "#fff5f5",
-      }}>
-        <h3 style={{ color: "#e63946" }}>Shipping Details:</h3>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "10px",
-            borderRadius: "5px",
-            border: "1px solid #e63946",
-          }}
-        />
-        {errors.name && <p style={{ color: "#9d0208" }}>{errors.name}</p>}
-        <input
-          type="text"
-          placeholder="Address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "10px",
-            borderRadius: "5px",
-            border: "1px solid #e63946",
-          }}
-        />
-        {errors.address && <p style={{ color: "#9d0208" }}>{errors.address}</p>}
-        <input
-          type="text"
-          placeholder="Phone Number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "10px",
-            borderRadius: "5px",
-            border: "1px solid #e63946",
-          }}
-        />
-        {errors.phone && <p style={{ color: "#9d0208" }}>{errors.phone}</p>}
-      </div>
+      <div
+  style={{
+    marginTop: "20px",
+    padding: "15px",
+    border: "1px solid #e63946",
+    borderRadius: "10px",
+    backgroundColor: "#fff5f5",
+    maxWidth: "500px",   // keeps it neat on large screens
+    margin: "20px auto", // centers it
+  }}
+>
+  <h3 style={{ color: "#e63946", marginBottom: "15px" }}>Shipping Details:</h3>
+
+  <input
+    type="text"
+    placeholder="Name"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "10px",
+      marginBottom: "10px",
+      borderRadius: "5px",
+      border: "1px solid #e63946",
+      boxSizing: "border-box",   // ✅ Fixes overflow
+    }}
+  />
+  {errors.name && <p style={{ color: "#9d0208", margin: "0 0 10px 0" }}>{errors.name}</p>}
+
+  <input
+    type="text"
+    placeholder="Address"
+    value={address}
+    onChange={(e) => setAddress(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "10px",
+      marginBottom: "10px",
+      borderRadius: "5px",
+      border: "1px solid #e63946",
+      boxSizing: "border-box",
+    }}
+  />
+  {errors.address && <p style={{ color: "#9d0208", margin: "0 0 10px 0" }}>{errors.address}</p>}
+
+  <input
+    type="text"
+    placeholder="Phone Number"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "10px",
+      marginBottom: "10px",
+      borderRadius: "5px",
+      border: "1px solid #e63946",
+      boxSizing: "border-box",
+    }}
+  />
+  {errors.phone && <p style={{ color: "#9d0208", margin: "0" }}>{errors.phone}</p>}
+</div>
+
 
       {/* Order Button */}
       <button
