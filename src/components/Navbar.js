@@ -28,8 +28,9 @@ const Navbar = ({ onBagClick }) => {
   return (
     <nav
       style={{
-        background: scrolled ? "#fff" : "#fff",
-        borderBottom: "1px solid #f1f1f1",
+        background: "#fff",
+        borderBottom: scrolled ? "1px solid #e5e7eb" : "none",
+        boxShadow: scrolled ? "0 2px 10px rgba(0,0,0,0.05)" : "none",
         position: "sticky",
         top: 0,
         zIndex: 50,
@@ -40,29 +41,30 @@ const Navbar = ({ onBagClick }) => {
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 16px",
+          padding: "0 24px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          height: "70px",
+          height: "72px",
         }}
       >
         {/* Logo */}
         <div
-  style={{
-    fontSize: "24px",
-    fontWeight: "900",
-    color: "#dc2626",
-    cursor: "pointer",
-  }}
-  onClick={() => window.location.href = '/'}
->
-  MAYURA
-</div>
+          style={{
+            fontSize: "26px",
+            fontWeight: "900",
+            color: "#dc2626",
+            cursor: "pointer",
+            letterSpacing: "2px",
+          }}
+          onClick={() => (window.location.href = "/")}
+        >
+          MAYURA
+        </div>
 
         {/* Desktop Nav */}
         {!isMobile && (
-          <div style={{ display: "flex", gap: "32px" }}>
+          <div style={{ display: "flex", gap: "36px" }}>
             {navCategories.map((cat) => (
               <a
                 key={cat}
@@ -73,9 +75,18 @@ const Navbar = ({ onBagClick }) => {
                   color: "#374151",
                   textDecoration: "none",
                   transition: "0.3s",
+                  position: "relative",
                 }}
-                onMouseEnter={(e) => (e.target.style.color = "#dc2626")}
-                onMouseLeave={(e) => (e.target.style.color = "#374151")}
+                onMouseEnter={(e) => {
+                  e.target.style.color = "#dc2626";
+                  e.target.style.borderBottom = "2px solid #dc2626";
+                  e.target.style.paddingBottom = "4px";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = "#374151";
+                  e.target.style.borderBottom = "none";
+                  e.target.style.paddingBottom = "0";
+                }}
               >
                 {cat}
               </a>
@@ -84,7 +95,7 @@ const Navbar = ({ onBagClick }) => {
         )}
 
         {/* Actions + Mobile Menu Toggle */}
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "22px" }}>
           {/* Search */}
           {!isMobile && (
             <div style={{ position: "relative" }}>
@@ -100,25 +111,52 @@ const Navbar = ({ onBagClick }) => {
               />
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search for products..."
                 style={{
-                  padding: "8px 12px 8px 36px",
-                  borderRadius: "20px",
+                  padding: "10px 14px 10px 38px",
+                  borderRadius: "9999px",
                   border: "1px solid #e5e7eb",
                   outline: "none",
                   fontSize: "14px",
-                  width: "220px",
+                  width: "240px",
+                  transition: "all 0.3s",
                 }}
+                onFocus={(e) =>
+                  (e.target.style.boxShadow = "0 0 6px rgba(220,38,38,0.3)")
+                }
+                onBlur={(e) => (e.target.style.boxShadow = "none")}
               />
             </div>
           )}
 
           {/* Icons */}
-          <User style={{ cursor: "pointer", color: "#374151" }} />
-          <Heart style={{ cursor: "pointer", color: "#374151" }} />
+          <User
+            style={{
+              cursor: "pointer",
+              color: "#374151",
+              transition: "0.3s",
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "#dc2626")}
+            onMouseLeave={(e) => (e.target.style.color = "#374151")}
+          />
+          <Heart
+            style={{
+              cursor: "pointer",
+              color: "#374151",
+              transition: "0.3s",
+            }}
+            onMouseEnter={(e) => (e.target.style.color = "#dc2626")}
+            onMouseLeave={(e) => (e.target.style.color = "#374151")}
+          />
           <ShoppingBag
-            style={{ cursor: "pointer", color: "#374151" }}
+            style={{
+              cursor: "pointer",
+              color: "#374151",
+              transition: "0.3s",
+            }}
             onClick={onBagClick}
+            onMouseEnter={(e) => (e.target.style.color = "#dc2626")}
+            onMouseLeave={(e) => (e.target.style.color = "#374151")}
           />
 
           {/* Mobile Menu Button */}
@@ -132,7 +170,7 @@ const Navbar = ({ onBagClick }) => {
                 color: "#374151",
               }}
             >
-              {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           )}
         </div>
@@ -144,10 +182,10 @@ const Navbar = ({ onBagClick }) => {
           style={{
             background: "#fff",
             borderTop: "1px solid #e5e7eb",
-            padding: "16px",
+            padding: "20px",
             display: "flex",
             flexDirection: "column",
-            gap: "16px",
+            gap: "18px",
             animation: "slideDown 0.3s ease",
           }}
         >
@@ -160,7 +198,7 @@ const Navbar = ({ onBagClick }) => {
                 fontSize: "16px",
                 color: "#374151",
                 textDecoration: "none",
-                padding: "8px 0",
+                padding: "10px 0",
                 transition: "0.3s",
               }}
               onMouseEnter={(e) => (e.target.style.color = "#dc2626")}
@@ -171,7 +209,7 @@ const Navbar = ({ onBagClick }) => {
           ))}
 
           {/* Mobile Search */}
-          <div style={{ position: "relative" }}>
+          <div style={{ position: "relative", marginTop: "8px" }}>
             <Search
               style={{
                 position: "absolute",
@@ -186,8 +224,8 @@ const Navbar = ({ onBagClick }) => {
               type="text"
               placeholder="Search..."
               style={{
-                padding: "8px 12px 8px 36px",
-                borderRadius: "20px",
+                padding: "10px 14px 10px 38px",
+                borderRadius: "9999px",
                 border: "1px solid #e5e7eb",
                 outline: "none",
                 fontSize: "14px",
